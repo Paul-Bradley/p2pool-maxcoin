@@ -123,6 +123,29 @@ nets = dict(
         VERSION_WARNING=lambda v: 'Upgrade Terracoin to >= 0.8.0.1!' if v < 80001 else None,
     ),
 
+
+    maxcoin=math.Object(
+        PARENT=networks.nets['luckycoin'],
+        SHARE_PERIOD=30,
+        NEW_SHARE_PERIOD=30, # seconds target spacing
+        CHAIN_LENGTH=3*60*60//30,
+        REAL_CHAIN_LENGTH=3*60*60//30,
+        TARGET_LOOKBEHIND=200,
+        SPREAD=15,
+        NEW_SPREAD=15, # blocks
+        IDENTIFIER='9c75636b79212121'.decode('hex'),
+        PREFIX='9a60193ab8b9617f'.decode('hex'),
+        P2P_PORT=8559,
+        MIN_TARGET=0,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=False,
+        WORKER_PORT=9559,
+        BOOTSTRAP_ADDRS='us-east1.cryptovein.com'.split(' '),
+        ANNOUNCE_CHANNEL='#cryptovein',
+        VERSION_CHECK=lambda v: True,
+    ),
+
+
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name
