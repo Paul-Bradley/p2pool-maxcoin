@@ -190,11 +190,11 @@ nets = dict(
 
     maxcoin=math.Object(
         P2P_PREFIX='f9bebbd2'.decode('hex'),
-        P2P_PORT=9917,
+        P2P_PORT=8668,
         ADDRESS_VERSION=110,
-        RPC_PORT=9918,
+        RPC_PORT=8108,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'luckycoinaddress' in (yield bitcoind.rpc_help()) and
+            'maxcoinaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda height: 96*100000000 >> (height + 1)//1036800,
@@ -203,11 +203,12 @@ nets = dict(
         BLOCK_PERIOD=30,
         SYMBOL='LKY',
         CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'maxcoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/maxcoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.maxcoin'), 'maxcoin.conf'),
-        BLOCK_EXPLORER_URL_PREFIX='http://d.evco.in/abe/block/',
-        ADDRESS_EXPLORER_URL_PREFIX='http://d.evco.in/abe/address/',
+        BLOCK_EXPLORER_URL_PREFIX='http://max.cryptoexplore.com/block/',
+        TX_EXPLORER_URL_PREFIX='http://max.cryptoexplore.com/tx/',
+        ADDRESS_EXPLORER_URL_PREFIX='http://max.cryptoexplore.com/address/',
         SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
-        DUMB_SCRYPT_DIFF=2**16,
-        DUST_THRESHOLD=1e8,
+        DUMB_SCRYPT_DIFF=1,
+        DUST_THRESHOLD=0.001e8,
     ),
 )
 for net_name, net in nets.iteritems():
