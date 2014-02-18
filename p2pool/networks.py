@@ -125,7 +125,7 @@ nets = dict(
 
 
     maxcoin=math.Object(
-        PARENT=networks.nets['luckycoin'],
+        PARENT=networks.nets['maxcoin'],
         SHARE_PERIOD=10,
         NEW_SHARE_PERIOD=10, # seconds target spacing
         CHAIN_LENGTH=24*60*60//30,
